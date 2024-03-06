@@ -2,10 +2,11 @@ import useGetMessages from '../../hooks/useGetMessages';
 import Message from './Message';
 import MessageSkeleton from '../skeletons/MessageSkeleton';
 import { useEffect, useRef } from 'react';
+import useListenMessages from '../../hooks/useListenMessages';
 
 const Messages = () => {
   const { messages, loading } = useGetMessages();
-
+  useListenMessages();
   const lastMessageRef = useRef();
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const Messages = () => {
         {!loading &&
           messages.length > 0 &&
           messages.map((message) => (
-            <div key={message._id} ref={lastMessageRef}>
+            <div key={message._id} ref={lastMessageRef} className="pb-1">
               <Message message={message} />
             </div>
           ))}
